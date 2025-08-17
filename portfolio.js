@@ -1,4 +1,4 @@
-// Modern Portfolio JavaScript - Interactive Features
+// Modern Portfolio JavaScript - Optimized Version
 
 class PortfolioApp {
     constructor() {
@@ -7,18 +7,19 @@ class PortfolioApp {
 
     init() {
         this.setupEventListeners();
-        this.initializeAnimations();
+        // this.initializeAnimations(); // Commented out - CSS animations are sufficient
         this.setupScrollEffects();
         this.setupFormHandling();
         this.setupLoadingScreen();
     }
 
     setupEventListeners() {
-        // Navigation scroll effect
-        window.addEventListener('scroll', () => {
+        // Navigation scroll effect with throttling for better performance
+        window.addEventListener('scroll', this.throttle(() => {
             this.handleNavbarScroll();
-            this.handleScrollAnimations();
-        });
+            this.updateActiveNavigation(); // Add active navigation tracking
+            // this.handleScrollAnimations(); // Commented out - CSS handles this
+        }, 100)); // Throttle to 100ms for better performance
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -36,25 +37,25 @@ class PortfolioApp {
             });
         }
 
-        // Project card interactions
+        // Project card interactions - simplified
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                this.animateProjectCard(card, 'enter');
+                card.style.transform = 'translateY(-5px)';
             });
             
             card.addEventListener('mouseleave', () => {
-                this.animateProjectCard(card, 'leave');
+                card.style.transform = 'translateY(0)';
             });
         });
 
-        // Skill card interactions
+        // Skill card interactions - simplified
         document.querySelectorAll('.skill-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                this.animateSkillCard(card, 'enter');
+                card.style.transform = 'scale(1.05)';
             });
             
             card.addEventListener('mouseleave', () => {
-                this.animateSkillCard(card, 'leave');
+                card.style.transform = 'scale(1)';
             });
         });
 
@@ -67,8 +68,8 @@ class PortfolioApp {
             });
         }
 
-        // Typing animation for hero title
-        this.initTypingAnimation();
+        // Commented out typing animation - too complex for simple portfolio
+        // this.initTypingAnimation();
     }
 
     setupLoadingScreen() {
@@ -97,6 +98,44 @@ class PortfolioApp {
         }
     }
 
+    updateActiveNavigation() {
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100; // Offset for navbar height
+            const sectionHeight = section.offsetHeight;
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+        
+        // Remove active class from all nav links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Add active class to current section's nav link
+        if (currentSection) {
+            const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${currentSection}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        } else {
+            // If at the top, make home link active
+            const homeLink = document.querySelector('.navbar-nav .nav-link[href="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        }
+    }
+
+    // Commented out complex scroll animations - CSS handles this better
+    /*
     handleScrollAnimations() {
         const elements = document.querySelectorAll('.animate-on-scroll');
         elements.forEach(element => {
@@ -108,6 +147,7 @@ class PortfolioApp {
             }
         });
     }
+    */
 
     smoothScrollTo(targetId) {
         const target = document.querySelector(targetId);
@@ -117,6 +157,11 @@ class PortfolioApp {
                 top: offsetTop,
                 behavior: 'smooth'
             });
+            
+            // Update active navigation after scrolling
+            setTimeout(() => {
+                this.updateActiveNavigation();
+            }, 100);
         }
     }
 
@@ -127,6 +172,8 @@ class PortfolioApp {
         }
     }
 
+    // Commented out complex card animations - simplified versions above
+    /*
     animateProjectCard(card, action) {
         const image = card.querySelector('.project-image img');
         const content = card.querySelector('.project-content');
@@ -151,7 +198,10 @@ class PortfolioApp {
             card.style.borderColor = 'var(--border-light)';
         }
     }
+    */
 
+    // Commented out typing animation - unnecessary complexity
+    /*
     initTypingAnimation() {
         const heroTitle = document.querySelector('.hero-title');
         if (!heroTitle) return;
@@ -177,7 +227,10 @@ class PortfolioApp {
         // Start typing animation after a short delay
         setTimeout(typeWriter, 500);
     }
+    */
 
+    // Commented out complex animation initialization - CSS handles this
+    /*
     initializeAnimations() {
         // Add animation classes to elements
         const animateElements = document.querySelectorAll('.skill-card, .project-card, .timeline-item');
@@ -200,22 +253,17 @@ class PortfolioApp {
             hero.style.transform = `translateY(${rate}px)`;
         });
     }
+    */
 
     setupFormHandling() {
         const form = document.querySelector('#contactForm');
         if (!form) return;
 
-        // Real-time form validation
+        // Simplified form validation - only basic checks
         const inputs = form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
             input.addEventListener('blur', () => {
                 this.validateField(input);
-            });
-            
-            input.addEventListener('input', () => {
-                if (input.classList.contains('error')) {
-                    this.validateField(input);
-                }
             });
         });
     }
@@ -350,7 +398,22 @@ class PortfolioApp {
         });
     }
 
-    // Utility function to check if element is in viewport
+    // Utility method for throttling scroll events
+    throttle(func, limit) {
+        let inThrottle;
+        return function() {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        };
+    }
+
+    // Commented out utility function - not needed for basic functionality
+    /*
     isInViewport(element) {
         const rect = element.getBoundingClientRect();
         return (
@@ -360,6 +423,7 @@ class PortfolioApp {
             rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
     }
+    */
 }
 
 // Initialize the app when DOM is loaded
@@ -367,7 +431,8 @@ document.addEventListener('DOMContentLoaded', () => {
     new PortfolioApp();
 });
 
-// Add some additional utility functions
+// Commented out utility functions - not needed for basic portfolio
+/*
 const Utils = {
     // Debounce function for performance
     debounce(func, wait) {
@@ -421,8 +486,4 @@ const Utils = {
         requestAnimationFrame(animation);
     }
 };
-
-// Export for use in other modules if needed
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { PortfolioApp, Utils };
-} 
+*/
