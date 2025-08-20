@@ -8,9 +8,9 @@ class PortfolioApp {
     init() {
         this.setupEventListeners();
         // this.initializeAnimations(); // Commented out - CSS animations are sufficient
-        this.setupScrollEffects();
+        // this.setupScrollEffects(); // Commented out - not needed for basic functionality
         this.setupFormHandling();
-        this.setupLoadingScreen();
+        // this.setupLoadingScreen();
     }
 
     setupEventListeners() {
@@ -19,7 +19,7 @@ class PortfolioApp {
             this.handleNavbarScroll();
             this.updateActiveNavigation(); // Add active navigation tracking
             // this.handleScrollAnimations(); // Commented out - CSS handles this
-        }, 100)); // Throttle to 100ms for better performance
+        }, 5)); // Throttle to 100ms for better performance
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -72,22 +72,22 @@ class PortfolioApp {
         // this.initTypingAnimation();
     }
 
-    setupLoadingScreen() {
-        const loading = document.querySelector('.loading');
-        if (loading) {
-            // Hide loading screen when page loads
-            window.addEventListener('load', () => {
-                loading.style.display = 'none';
-            });
+    // setupLoadingScreen() {
+    //     const loading = document.querySelector('.loading');
+    //     if (loading) {
+    //         // Hide loading screen when page loads
+    //         window.addEventListener('load', () => {
+    //             loading.style.display = 'none';
+    //         });
             
-            // Fallback: hide loading screen after 2 seconds
-            setTimeout(() => {
-                if (loading) {
-                    loading.style.display = 'none';
-                }
-            }, 2000);
-        }
-    }
+    //         // Fallback: hide loading screen after 2 seconds
+    //         setTimeout(() => {
+    //             if (loading) {
+    //                 loading.style.display = 'none';
+    //             }
+    //         }, 2000);
+    //     }
+    // }
 
     handleNavbarScroll() {
         const navbar = document.querySelector('.navbar');
@@ -322,28 +322,63 @@ class PortfolioApp {
     }
 
     async handleFormSubmission(form) {
+        // Validate all fields first
+        const inputs = form.querySelectorAll('input, textarea');
+        let isFormValid = true;
+        
+        inputs.forEach(input => {
+            if (!this.validateField(input)) {
+                isFormValid = false;
+            }
+        });
+
+        if (!isFormValid) {
+            this.showNotification('Please fix the errors before submitting.', 'error');
+            return;
+        }
+
         const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
         const submitButton = form.querySelector('button[type="submit"]');
-        const originalText = submitButton.textContent;
+        const originalText = submitButton.innerHTML;
 
         // Show loading state
         submitButton.disabled = true;
         submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
 
-        // Simulate form submission (replace with actual API call)
         try {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
-            
-            // Show success message
-            this.showNotification('Message sent successfully!', 'success');
-            form.reset();
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (response.ok && result.success) {
+                this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+                form.reset();
+                // Clear any validation errors
+                inputs.forEach(input => {
+                    input.classList.remove('error');
+                    const errorElement = input.parentNode.querySelector('.error-message');
+                    if (errorElement) {
+                        errorElement.remove();
+                    }
+                });
+            } else {
+                throw new Error(result.message || 'Failed to send message.');
+            }
             
         } catch (error) {
-            this.showNotification('Failed to send message. Please try again.', 'error');
+            console.error('Form submission error:', error);
+            this.showNotification(error.message || 'Failed to send message. Please try again.', 'error');
         } finally {
             // Reset button state
             submitButton.disabled = false;
-            submitButton.textContent = originalText;
+            submitButton.innerHTML = originalText;
         }
     }
 
