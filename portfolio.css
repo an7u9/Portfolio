@@ -496,3 +496,47 @@ h6 {
     transform: rotate(360deg);
   }
 }
+
+/* Stars Container */
+.shooting-stars {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Single Falling Star */
+.shooting-star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #aaf);
+
+  animation: star-fall linear forwards;
+}
+
+/* Keyframes for gentle falling motion */
+@keyframes star-fall {
+  0% {
+    transform: translateY(-10px) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.8;
+    transform: translateY(100vh) translateX(var(--drift, 0px));
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(105vh) translateX(var(--drift, 0px));
+  }
+}

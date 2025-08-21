@@ -1,2 +1,16 @@
-node_modules
-.vscode
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Build output
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db

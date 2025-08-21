@@ -51,13 +51,13 @@ class PortfolioApp {
         // Skill card interactions - simplified
         document.querySelectorAll('.skill-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                card.style.transform = 'scale(1.05)';
+                card.style.transform = 'scale(1.08)';
             });
             
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'scale(1)';
             });
-        });
+        });        
 
         // Form submission
         const contactForm = document.querySelector('#contactForm');
@@ -464,6 +464,45 @@ class PortfolioApp {
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new PortfolioApp();
+
+    const container = document.querySelector('.shooting-stars');
+    if (!container) return;
+
+    function createFallingStar() {
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+
+        // Random start X position
+        const startLeft = Math.random() * 100;
+        star.style.left = startLeft + 'vw';
+
+        // Random size (tiny twinkling stars)
+        const size = Math.random() * 3 + 2;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+
+        // Gentle horizontal drift
+        const drift = (Math.random() - 0.5) * 50; // -25px to +25px
+        star.style.setProperty('--drift', drift + 'px');
+
+        // Random fall duration (slow & soft)
+        const duration = (Math.random() * 5 + 6).toFixed(2); // 6–11s
+        star.style.animationDuration = duration + 's';
+
+        container.appendChild(star);
+
+        setTimeout(() => {
+            star.remove();
+        }, duration * 1000);
+    }
+
+    // Keep spawning stars at random intervals
+    setInterval(() => {
+        const count = Math.floor(Math.random() * 4) + 3; // 3–6 stars
+        for (let i = 0; i < count; i++) {
+            setTimeout(createFallingStar, i * 400); // staggered start
+        }
+    }, 1500);
 });
 
 // Commented out utility functions - not needed for basic portfolio
