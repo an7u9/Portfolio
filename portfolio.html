@@ -21,30 +21,59 @@
 </head>
 
 <body>
+
     <!-- Shooting Stars Animation -->
+     <div class="starry-bg"></div>
     <div class="shooting-stars"></div>
     <!-- Loading Screen -->
     <div class="loading">
         <div class="loading-spinner"></div>
     </div>
-
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center min-vh-100">
-                <div class="col-lg-6 hero-content">
-                    <div class="container">
-                        <a class="navbar-brand">
-                            <span class="text-gradient">ANSHUMAN JENA</span>
+            <div class="row align-items-center min-vh-100 g-4">
+
+                <!-- Aside Section -->
+                <div class="col-lg-2 d-flex justify-content-center">
+                    <aside class="aside-glass p-4 d-flex flex-column gap-4">
+                        <a href="resume.pdf" target="_blank" class="d-flex align-items-center gap-3 aside-link">
+                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Resume"
+                                style="width:32px;height:32px;">
+                            <span>Resume</span>
                         </a>
+                        <a href="https://github.com/an7u9" target="_blank"
+                            class="d-flex align-items-center gap-3 aside-link">
+                            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="Github"
+                                style="width:32px;height:32px;">
+                            <span>Github</span>
+                        </a>
+                        <a href="https://linkedin.com/in/anshuman-jena" target="_blank"
+                            class="d-flex align-items-center gap-3 aside-link">
+                            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"
+                                style="width:32px;height:32px;">
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="#contact" class="d-flex align-items-center gap-3 aside-link">
+                            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Message"
+                                style="width:32px;height:32px;">
+                            <span>Message</span>
+                        </a>
+                    </aside>
+                </div>
+
+                <!-- About Section -->
+                <div class="col-lg-5 hero-content">
+                    <div class="container mb-2">
+                        <span class="text-gradient" style="font-size:2.2rem;font-weight:800;">ANSHUMAN JENA</span>
                     </div>
 
-                    <div class="badge-chip">
+                    <div class="badge-chip mb-3">
                         <i class="bi bi-stars"></i>
                         Back-End Developer
                     </div>
 
-                    <h1 class="hero-title">
+                    <h1 class="hero-title mb-4">
                         Crafting <span class="text-gradient">Digital</span> Experiences
                     </h1>
 
@@ -53,24 +82,14 @@
                         Specializing in React, Node.js, and cloud technologies.
                     </p>
 
-                    <div class="d-flex gap-3 mb-4">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="bi bi-rocket-takeoff me-2"></i>
-                            View Projects
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="bi bi-envelope me-2"></i>
-                            Get In Touch
-                        </a>
-                    </div>
-
-                    <div class="d-flex align-items-center gap-4 text-secondary small">
+                    <div class="d-flex align-items-center gap-4 text-secondary small mt-4">
                         <span><i class="bi bi-geo-alt me-1"></i>Based in India</span>
                         <span><i class="bi bi-clock me-1"></i>Available for hire</span>
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <!-- Photo Section -->
+                <div class="col-lg-5">
                     <div class="glass-card p-4 animate-float">
                         <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755712514/65ef63f6bd30ab838939a4ae_Developer_productivity_tools_2024_ipau0q.webp?q=80&w=1400&auto=format&fit=auto"
                             alt="Modern Development Setup" class="img-fluid rounded-4">
@@ -79,6 +98,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- About Section -->
     <section id="about" class="py-5">
@@ -310,37 +330,37 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <form id="contactForm" class="contact-form" action="https://formspree.io/f/your_form_id"
-                        method="POST">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="subject" class="form-label">Subject</label>
-                                <input type="text" class="form-control" id="subject" name="subject" required>
-                            </div>
-                            <div class="col-12">
-                                <label for="message" class="form-label">Message</label>
-                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="bi bi-send me-2"></i>
-                                    Send Message
-                                </button>
-                            </div>
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="contact-section-glass" style="width: 75%; max-width: 900px; margin: 0 auto;">
+                <h2 class="section-title text-center mb-4">Let's Connect</h2>
+                <p class="text-secondary text-center mb-4">Feel free to reach out for collaborations, freelance work, or
+                    just to say hi!</p>
+                <form id="contactForm" class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
                         </div>
-                    </form>
-                </div>
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" name="subject" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-send me-2"></i>
+                                Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </section>
