@@ -64,51 +64,12 @@ h6 {
 }
 
 /* Navigation */
-.navbar {
-  background: transparent;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  padding: 1rem 0;
-}
-
-.navbar.scrolled {
-  background: rgba(13, 15, 20, 0.8);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
 
 .navbar-brand {
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: var(--text-primary) !important;
   letter-spacing: 0.1em;
-}
-
-.nav-link {
-  color: var(--text-secondary) !important;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--text-primary) !important;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
 }
 
 /* Hero Section */
@@ -355,6 +316,7 @@ h6 {
   border-radius: var(--radius-lg);
   padding: 2rem;
   backdrop-filter: blur(10px);
+  width: 70%;
 }
 
 .form-control {
@@ -505,16 +467,16 @@ h6 {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  z-index: 100;
+  z-index: 1;
   overflow: hidden;
 }
 
 /* Single Falling Star */
 .shooting-star {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: white;
+  width: 2px;
+  height: 2px;
+  background: rgb(255, 255, 255);
   border-radius: 50%;
   opacity: 0.9;
   filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #aaf);
