@@ -1,3 +1,57 @@
+// --- Animated Sky & Stars ---
+// Set current year in footer
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Set current year in footer
+    const yearEl = document.getElementById('currentYear');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    // Simple loading screen removal
+    const loading = document.querySelector('.loading');
+    if (loading) loading.style.display = 'none';
+    setTimeout(() => { if (loading) loading.style.display = 'none'; }, 3000);
+
+    // --- Starfield Generation ---
+    const starContainer = document.querySelector('.stars');
+    if (starContainer) {
+        // Generate hundreds of stars
+        const STAR_COUNT = 220;
+        for (let i = 0; i < STAR_COUNT; i++) {
+            const star = document.createElement('span');
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const size = Math.random() * 2 + 1; // 1px–3px
+            const delay = Math.random() * 3.5;
+            const brightness = 0.7 + Math.random() * 0.6;
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.animationDelay = `${delay}s`;
+            star.style.filter = `brightness(${brightness})`;
+            starContainer.appendChild(star);
+        }
+
+        // --- Shooting Stars ---
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            // Random start position (top 60% of screen)
+            const startY = Math.random() * window.innerHeight * 0.6;
+            const startX = Math.random() * window.innerWidth * 0.7;
+            shootingStar.style.top = `${startY}px`;
+            shootingStar.style.left = `${startX}px`;
+            // Random tilt
+            const tilt = -15 + Math.random() * 30; // -15deg to +15deg
+            shootingStar.style.transform = `rotate(${tilt}deg)`;
+            starContainer.appendChild(shootingStar);
+            setTimeout(() => shootingStar.remove(), 1200);
+        }
+
+        // Appear every 10–15s
+        setInterval(createShootingStar, 10000 + Math.random() * 5000);
+    }
+});
 // Modern Portfolio JavaScript - Optimized Version
 
 class PortfolioApp {
@@ -496,13 +550,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, duration * 1000);
     }
 
-    // Keep spawning stars at random intervals
-    setInterval(() => {
-        const count = Math.floor(Math.random() * 4) + 3; // 3–6 stars
-        for (let i = 0; i < count; i++) {
-            setTimeout(createFallingStar, i * 400); // staggered start
-        }
-    }, 1500);
 });
 
 // Commented out utility functions - not needed for basic portfolio
