@@ -21,149 +21,92 @@
 </head>
 
 <body>
-        <div class="starfield-bg">
-            <div class="milkyway"></div>
-            <div class="star-overlay"></div>
-            <div class="stars"></div>
-        </div>
+    <div class="starfield-bg">
+        <div class="milkyway"></div>
+        <div class="star-overlay"></div>
+        <div class="stars"></div>
+    </div>
     <!-- Loading Screen -->
     <div class="loading">
         <div class="loading-spinner"></div>
     </div>
-    <!-- Hero Section -->
+    <!-- Hero Section with Integrated About Links -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="row align-items-center min-vh-100 g-4">
-
-                <!-- Aside Section -->
-                <div class="col-lg-2 d-flex justify-content-center">
-                    <aside class="aside-glass p-4 d-flex flex-column gap-4">
-                        <a href="resume.pdf" target="_blank" class="d-flex align-items-center gap-3 aside-link">
-                            <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Resume"
-                                style="width:32px;height:32px;">
-                            <span>Resume</span>
-                        </a>
-                        <a href="https://github.com/an7u9" target="_blank"
-                            class="d-flex align-items-center gap-3 aside-link">
-                            <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="Github"
-                                style="width:32px;height:32px;">
-                            <span>Github</span>
-                        </a>
-                        <a href="https://linkedin.com/in/anshuman-jena" target="_blank"
-                            class="d-flex align-items-center gap-3 aside-link">
-                            <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"
-                                style="width:32px;height:32px;">
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="#contact" class="d-flex align-items-center gap-3 aside-link">
-                            <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Message"
-                                style="width:32px;height:32px;">
-                            <span>Message</span>
-                        </a>
-                    </aside>
-                </div>
+            <div class="row align-items-start g-4">
 
                 <!-- About Section -->
-                <div class="col-lg-5 hero-content">
-                    <div class="container mb-2">
-                        <span class="text-gradient" style="font-size:2.2rem;font-weight:800;">ANSHUMAN JENA</span>
+                <div class="col-lg-7 hero-content">
+                    <div class="mb-2">
+                        <span class="text-gradient" style="font-size:1.8rem;font-weight:800;">ANSHUMAN JENA</span>
                     </div>
 
-                    <div class="badge-chip mb-3">
+                    <div class="badge-chip mb-2">
                         <i class="bi bi-stars"></i>
                         Back-End Developer
                     </div>
 
-                    <h1 class="hero-title mb-4">
+                    <h1 class="hero-title mb-3">
                         Crafting <span class="text-gradient">Digital</span> Experiences
                     </h1>
 
-                    <p class="lead text-secondary mb-4">
+                    <p class="lead text-secondary mb-3">
                         I build modern, responsive web applications with clean code and beautiful interfaces.
                         Specializing in React, Node.js, and cloud technologies.
                     </p>
 
-                    <div class="d-flex align-items-center gap-4 text-secondary small mt-4">
+                    <div class="d-flex align-items-center gap-4 text-secondary small mb-3">
                         <span><i class="bi bi-geo-alt me-1"></i>Based in India</span>
                         <span><i class="bi bi-clock me-1"></i>Available for hire</span>
                     </div>
                 </div>
 
-                <!-- Photo Section -->
+                <!-- Photo & Links Section -->
                 <div class="col-lg-5">
-                    <div class="glass-card p-4 animate-float">
-                        <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755712514/65ef63f6bd30ab838939a4ae_Developer_productivity_tools_2024_ipau0q.webp?q=80&w=1400&auto=format&fit=auto"
-                            alt="Modern Development Setup" class="img-fluid rounded-4">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="section-title">About Me</h2>
-                    <p class="text-secondary mb-4">
-                        I'm a passionate full-stack developer with a love for creating elegant solutions to complex
-                        problems.
-                        With expertise in modern web technologies, I focus on building scalable applications that
-                        deliver
-                        exceptional user experiences.
-                    </p>
-
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <div class="glass-card p-3 text-center">
-                                <h4 class="text-gradient mb-1">3+</h4>
-                                <small class="text-secondary">Years Experience</small>
+                    <div class="hero-right-section">
+                        <div class="photo-container">
+                            <div class="glass-card p-3 animate-float">
+                                <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755958418/me_u58kim.jpg?q=80&w=1400&auto=format&fit=auto"
+                                    alt="Modern Development Setup" class="img-fluid rounded-3">
                             </div>
                         </div>
-                        <div class="col-6">
-                            <div class="glass-card p-3 text-center">
-                                <h4 class="text-gradient mb-1">50+</h4>
-                                <small class="text-secondary">Projects Completed</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="glass-card p-4">
-                        <h5 class="mb-3">What I Do</h5>
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <i class="bi bi-code-slash text-gradient fs-4"></i>
-                            <div>
-                                <h6 class="mb-1">Web Development</h6>
-                                <small class="text-secondary">Building responsive, modern web applications</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <i class="bi bi-phone text-gradient fs-4"></i>
-                            <div>
-                                <h6 class="mb-1">Mobile Apps</h6>
-                                <small class="text-secondary">Cross-platform mobile development</small>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <i class="bi bi-cloud text-gradient fs-4"></i>
-                            <div>
-                                <h6 class="mb-1">Cloud Solutions</h6>
-                                <small class="text-secondary">Scalable cloud infrastructure</small>
-                            </div>
+                        
+                        <!-- Links moved to bottom of right section -->
+                        <div class="hero-links-bottom d-flex flex-wrap justify-content-center gap-2">
+                            <a href="resume.pdf" target="_blank" class="hero-link-item d-flex align-items-center gap-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Resume"
+                                    class="link-icon">
+                                <span>Resume</span>
+                            </a>
+                            <a href="https://github.com/an7u9" target="_blank"
+                                class="hero-link-item d-flex align-items-center gap-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="Github"
+                                    class="link-icon">
+                                <span>Github</span>
+                            </a>
+                            <a href="https://www.linkedin.com/in/anshuman-jena-83411722a/" target="_blank"
+                                class="hero-link-item d-flex align-items-center gap-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"
+                                    class="link-icon">
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#contact" class="hero-link-item d-flex align-items-center gap-2">
+                                <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755931328/5356190_h84t8f.png"
+                                    alt="Message" class="link-icon">
+                                <span>Message</span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
     <!-- Skills Section -->
-    <section id="skills" class="py-5">
+    <section id="skills">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Skills & Technologies</h2>
+            <h2 class="section-title text-center">Skills & Technologies</h2>
 
             <div class="skills-grid">
                 <div class="skill-card">
@@ -236,90 +179,198 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-5">
+    <section id="experience">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Experience</h2>
+            <h2 class="section-title text-center">Experience</h2>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div>
-                            <h5 class="mb-1">Associate Software Engineer</h5>
-                            <p class="text-secondary mb-0">Incture Technologies</p>
+            <div class="experience-container">
+                <div class="experience-card glass-card">
+                    <div class="experience-header">
+                        <div class="company-logo">
+                            <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755932738/inc_c7iykg.jpg"
+                                alt="Company Logo" class="img-fluid"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+                            <i class="bi bi-building text-gradient fs-3" style="display:none;"></i>
                         </div>
-                        <span class="badge bg-primary">2025 - Present</span>
+
+                        <div class="experience-info">
+                            <h4 class="job-title mb-1">Associate Software Engineer - Intern</h4>
+                            <h6 class="company-name text-gradient mb-2">Incture Technologies</h6>
+                            <div class="experience-meta">
+                                <span class="duration-badge">
+                                    <i class="bi bi-calendar3 me-1"></i>
+                                    Aug 2025 - Present
+                                </span>
+                                <span class="location-badge">
+                                    <i class="bi bi-geo-alt me-1"></i>
+                                    Bhubaneswar, India
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                    <p class="text-secondary">
-                        Leading development of enterprise web applications using React, Node.js, and AWS.
-                        Mentoring junior developers and implementing best practices.
-                    </p>
+
+                    <div class="experience-description">
+                        <p class="text-secondary mb-3">
+                            Leading development of enterprise web applications using modern technologies and best
+                            practices.
+                        </p>
+
+                        <div class="achievements">
+                            <h6 class="achievements-title text-primary mb-2">Key Achievements:</h6>
+                            <ul class="achievement-list">
+                                <li><i class="bi bi-check-circle text-gradient me-2"></i>Developed scalable web
+                                    applications using React and Node.js</li>
+                                <li><i class="bi bi-check-circle text-gradient me-2"></i>Implemented cloud solutions
+                                    with AWS services</li>
+                                <li><i class="bi bi-check-circle text-gradient me-2"></i>Mentored junior developers and
+                                    led code reviews</li>
+                                <li><i class="bi bi-check-circle text-gradient me-2"></i>Improved application
+                                    performance by 40%</li>
+                            </ul>
+                        </div>
+
+                        <div class="tech-stack">
+                            <h6 class="tech-title text-primary mb-2">Technologies:</h6>
+                            <div class="tech-badges">
+                                <span class="tech-badge">Spring Boot</span>
+                                <span class="tech-badge">JAVA</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">JWT Auth</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-5">
+    <section id="projects">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Featured Projects</h2>
+            <h2 class="section-title text-center">Featured Projects</h2>
 
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card">
+                    <div class="project-card glass-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1591337676887-a217a6970a8a?q=80&w=1200&auto=format&fit=crop"
+                            <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755965774/pexels-negativespace-34577_gnlsud.jpg"
                                 alt="E-commerce Platform">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/an7u9/ecommerce-platform" target="_blank"
+                                        class="project-link">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="project-content">
                             <h5 class="project-title">E-commerce Platform</h5>
                             <p class="project-description">
                                 Full-stack e-commerce solution with React frontend, Node.js backend, and MongoDB
-                                database.
+                                database. Features include user authentication, payment integration, and admin
+                                dashboard.
                             </p>
-                            <div class="d-flex gap-2">
-                                <span class="badge bg-primary">React</span>
-                                <span class="badge bg-primary">Node.js</span>
-                                <span class="badge bg-primary">MongoDB</span>
+                            <div class="project-tech-stack">
+                                <span class="tech-badge">React</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">MongoDB</span>
+                                <span class="tech-badge">Stripe</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/an7u9/ecommerce-platform" target="_blank"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-github me-1"></i>View Code
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-eye me-1"></i>Live Demo
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card">
+                    <div class="project-card glass-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop"
+                            <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755965843/pexels-thisisengineering-3861972_fqacud.jpg"
                                 alt="Task Management App">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/an7u9/task-manager" target="_blank"
+                                        class="project-link">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="project-content">
                             <h5 class="project-title">Task Management App</h5>
                             <p class="project-description">
-                                Real-time collaborative task management application with drag-and-drop functionality.
+                                Real-time collaborative task management application with drag-and-drop functionality,
+                                team collaboration, and progress tracking features.
                             </p>
-                            <div class="d-flex gap-2">
-                                <span class="badge bg-primary">Vue.js</span>
-                                <span class="badge bg-primary">Socket.io</span>
-                                <span class="badge bg-primary">Express</span>
+                            <div class="project-tech-stack">
+                                <span class="tech-badge">Vue.js</span>
+                                <span class="tech-badge">Socket.io</span>
+                                <span class="tech-badge">Express</span>
+                                <span class="tech-badge">PostgreSQL</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/an7u9/task-manager" target="_blank"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-github me-1"></i>View Code
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-eye me-1"></i>Live Demo
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card">
+                    <div class="project-card glass-card">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1526378722484-bd91ca387e72?q=80&w=1200&auto=format&fit=crop"
+                            <img src="https://res.cloudinary.com/dyp1fmsph/image/upload/v1755965911/pexels-tara-winstead-8386440_x6lzka.jpg"
                                 alt="AI Chat Application">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="https://github.com/an7u9/ai-chat-bot" target="_blank" class="project-link">
+                                        <i class="bi bi-github"></i>
+                                    </a>
+                                    <a href="#" class="project-link">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="project-content">
                             <h5 class="project-title">AI Chat Application</h5>
                             <p class="project-description">
-                                Intelligent chatbot application with natural language processing and machine learning.
+                                Intelligent chatbot application with natural language processing, machine learning
+                                capabilities, and context-aware responses.
                             </p>
-                            <div class="d-flex gap-2">
-                                <span class="badge bg-primary">Python</span>
-                                <span class="badge bg-primary">TensorFlow</span>
-                                <span class="badge bg-primary">Flask</span>
+                            <div class="project-tech-stack">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">TensorFlow</span>
+                                <span class="tech-badge">Flask</span>
+                                <span class="tech-badge">OpenAI</span>
+                            </div>
+                            <div class="project-actions">
+                                <a href="https://github.com/an7u9/ai-chat-bot" target="_blank"
+                                    class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-github me-1"></i>View Code
+                                </a>
+                                <a href="#" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-eye me-1"></i>Live Demo
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -329,14 +380,14 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-5">
+    <section id="contact">
         <div class="container d-flex justify-content-center align-items-center">
-            <div class="contact-section-glass" style="width: 75%; max-width: 900px; margin: 0 auto;">
-                <h2 class="section-title text-center mb-4">Let's Connect</h2>
-                <p class="text-secondary text-center mb-4">Feel free to reach out for collaborations, freelance work, or
+            <div class="contact-section-glass" style="width: 75%; max-width: 800px; margin: 0 auto;">
+                <h2 class="section-title text-center mb-3">Let's Connect</h2>
+                <p class="text-secondary text-center mb-3">Feel free to reach out for collaborations, freelance work, or
                     just to say hi!</p>
                 <form id="contactForm" class="contact-form" action="https://formspree.io/f/your_form_id" method="POST">
-                    <div class="row g-4">
+                    <div class="row g-3">
                         <div class="col-md-6">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -366,10 +417,10 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-4 text-center">
+    <footer class="py-3 text-center">
         <div class="container">
-            <div class="glass-card p-3">
-                <p class="text-secondary mb-0">
+            <div class="glass-card p-2">
+                <p class="text-secondary mb-0 small">
                     © <span id="currentYear"></span> anshuman jena. All rights reserved.
                 </p>
             </div>

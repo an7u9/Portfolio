@@ -78,10 +78,17 @@ class PortfolioApp {
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.smoothScrollTo(link.getAttribute('href'));
+                e.preventDefault(); // stop default jump
+                const targetId = link.getAttribute('href');
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
+                    targetEl.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
+
 
         // Mobile menu toggle
         const mobileMenuToggle = document.querySelector('.navbar-toggler');
@@ -96,7 +103,7 @@ class PortfolioApp {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-5px)';
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0)';
             });
@@ -107,11 +114,11 @@ class PortfolioApp {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'scale(1.08)';
             });
-            
+
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'scale(1)';
             });
-        });        
+        });
 
         // Form submission
         const contactForm = document.querySelector('#contactForm');
@@ -133,7 +140,7 @@ class PortfolioApp {
     //         window.addEventListener('load', () => {
     //             loading.style.display = 'none';
     //         });
-            
+
     //         // Fallback: hide loading screen after 2 seconds
     //         setTimeout(() => {
     //             if (loading) {
@@ -155,24 +162,24 @@ class PortfolioApp {
     updateActiveNavigation() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
-        
+
         let currentSection = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100; // Offset for navbar height
             const sectionHeight = section.offsetHeight;
             const scrollPosition = window.scrollY;
-            
+
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('id');
             }
         });
-        
+
         // Remove active class from all nav links
         navLinks.forEach(link => {
             link.classList.remove('active');
         });
-        
+
         // Add active class to current section's nav link
         if (currentSection) {
             const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${currentSection}"]`);
@@ -211,7 +218,7 @@ class PortfolioApp {
                 top: offsetTop,
                 behavior: 'smooth'
             });
-            
+
             // Update active navigation after scrolling
             setTimeout(() => {
                 this.updateActiveNavigation();
@@ -356,7 +363,7 @@ class PortfolioApp {
 
     showFieldValidation(field, isValid, errorMessage) {
         const errorElement = field.parentNode.querySelector('.error-message');
-        
+
         if (!isValid) {
             field.classList.add('error');
             if (!errorElement) {
@@ -379,7 +386,7 @@ class PortfolioApp {
         // Validate all fields first
         const inputs = form.querySelectorAll('input, textarea');
         let isFormValid = true;
-        
+
         inputs.forEach(input => {
             if (!this.validateField(input)) {
                 isFormValid = false;
@@ -425,7 +432,7 @@ class PortfolioApp {
             } else {
                 throw new Error(result.message || 'Failed to send message.');
             }
-            
+
         } catch (error) {
             console.error('Form submission error:', error);
             this.showNotification(error.message || 'Failed to send message. Please try again.', 'error');
@@ -490,7 +497,7 @@ class PortfolioApp {
     // Utility method for throttling scroll events
     throttle(func, limit) {
         let inThrottle;
-        return function() {
+        return function () {
             const args = arguments;
             const context = this;
             if (!inThrottle) {
