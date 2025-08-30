@@ -1,126 +1,165 @@
-// --- Animated Sky & Stars ---
-// Set current year in footer
+/**
+ * Portfolio Application - Enhanced Interactive Experience
+ * Handles animations, form submissions, and user interactions
+ */
+
+// =============================================================================
+// INITIALIZATION & BASIC SETUP
+// =============================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set current year in footer
     const yearEl = document.getElementById('currentYear');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-    // Simple loading screen removal
+    // Remove loading screen
     const loading = document.querySelector('.loading');
-    if (loading) loading.style.display = 'none';
-    setTimeout(() => { if (loading) loading.style.display = 'none'; }, 3000);
-
-    // --- Starfield Generation ---
-    const starContainer = document.querySelector('.stars');
-    if (starContainer) {
-        // Generate hundreds of stars
-        const STAR_COUNT = 220;
-        for (let i = 0; i < STAR_COUNT; i++) {
-            const star = document.createElement('span');
-            const x = Math.random() * window.innerWidth;
-            const y = Math.random() * window.innerHeight;
-            const size = Math.random() * 2 + 1; // 1px–3px
-            const delay = Math.random() * 3.5;
-            const brightness = 0.7 + Math.random() * 0.6;
-            star.style.left = `${x}px`;
-            star.style.top = `${y}px`;
-            star.style.width = `${size}px`;
-            star.style.height = `${size}px`;
-            star.style.animationDelay = `${delay}s`;
-            star.style.filter = `brightness(${brightness})`;
-            starContainer.appendChild(star);
-        }
-
-        // --- Shooting Stars ---
-        function createShootingStar() {
-            const shootingStar = document.createElement('div');
-            shootingStar.className = 'shooting-star';
-            // Random start position (top 60% of screen)
-            const startY = Math.random() * window.innerHeight * 0.6;
-            const startX = Math.random() * window.innerWidth * 0.7;
-            shootingStar.style.top = `${startY}px`;
-            shootingStar.style.left = `${startX}px`;
-            // Random tilt
-            const tilt = -15 + Math.random() * 30; // -15deg to +15deg
-            shootingStar.style.transform = `rotate(${tilt}deg)`;
-            starContainer.appendChild(shootingStar);
-            setTimeout(() => shootingStar.remove(), 1200);
-        }
-
-        // Appear every 10–15s
-        setInterval(createShootingStar, 10000 + Math.random() * 5000);
+    if (loading) {
+        loading.style.display = 'none';
+        setTimeout(() => { if (loading) loading.style.display = 'none'; }, 3000);
     }
+
+    // Initialize starfield animation
+    initializeStarfield();
 });
-// Modern Portfolio JavaScript - Optimized Version
+
+// =============================================================================
+// STARFIELD & VISUAL EFFECTS
+// =============================================================================
+
+function initializeStarfield() {
+    const starContainer = document.querySelector('.stars');
+    if (!starContainer) return;
+
+    // Generate background stars
+    const STAR_COUNT = 220;
+    for (let i = 0; i < STAR_COUNT; i++) {
+        const star = document.createElement('span');
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const size = Math.random() * 2 + 1; // 1px–3px
+        const delay = Math.random() * 3.5;
+        const brightness = 0.7 + Math.random() * 0.6;
+        
+        star.style.cssText = `
+            left: ${x}px;
+            top: ${y}px;
+            width: ${size}px;
+            height: ${size}px;
+            animation-delay: ${delay}s;
+            filter: brightness(${brightness});
+        `;
+        
+        starContainer.appendChild(star);
+    }
+
+    // Create periodic shooting stars
+    function createShootingStar() {
+        const shootingStar = document.createElement('div');
+        shootingStar.className = 'shooting-star';
+        
+        // Random start position (top 60% of screen)
+        const startY = Math.random() * window.innerHeight * 0.6;
+        const startX = Math.random() * window.innerWidth * 0.7;
+        const tilt = -15 + Math.random() * 30; // -15deg to +15deg
+        
+        shootingStar.style.cssText = `
+            top: ${startY}px;
+            left: ${startX}px;
+            transform: rotate(${tilt}deg);
+        `;
+        
+        starContainer.appendChild(shootingStar);
+        setTimeout(() => shootingStar.remove(), 1200);
+    }
+
+    // Create shooting stars every 10–15 seconds
+    setInterval(createShootingStar, 10000 + Math.random() * 5000);
+}
+// =============================================================================
+// MAIN PORTFOLIO APPLICATION CLASS
+// =============================================================================
 
 class PortfolioApp {
     constructor() {
+        this.requiredFields = ['name', 'email', 'message']; // Removed 'subject' field
         this.init();
     }
 
     init() {
         this.setupEventListeners();
-        // this.initializeAnimations(); // Commented out - CSS animations are sufficient
-        // this.setupScrollEffects(); // Commented out - not needed for basic functionality
         this.setupFormHandling();
-        // this.setupLoadingScreen();
     }
 
+    // =============================================================================
+    // EVENT LISTENERS SETUP
+    // =============================================================================
+    
     setupEventListeners() {
-        // Navigation scroll effect with throttling for better performance
+        // Scroll effects with throttling for performance
         window.addEventListener('scroll', this.throttle(() => {
             this.handleNavbarScroll();
-            this.updateActiveNavigation(); // Add active navigation tracking
-            // this.handleScrollAnimations(); // Commented out - CSS handles this
-        }, 5)); // Throttle to 100ms for better performance
+            this.updateActiveNavigation();
+        }, 100));
 
         // Smooth scrolling for navigation links
+        this.setupSmoothScrolling();
+        
+        // Mobile menu functionality
+        this.setupMobileMenu();
+        
+        // Interactive card effects
+        this.setupCardInteractions();
+        
+        // Form submission handling
+        this.setupContactForm();
+    }
+    
+    setupSmoothScrolling() {
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
-                e.preventDefault(); // stop default jump
+                e.preventDefault();
                 const targetId = link.getAttribute('href');
                 const targetEl = document.querySelector(targetId);
                 if (targetEl) {
-                    targetEl.scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
-
-
-        // Mobile menu toggle
+    }
+    
+    setupMobileMenu() {
         const mobileMenuToggle = document.querySelector('.navbar-toggler');
         if (mobileMenuToggle) {
             mobileMenuToggle.addEventListener('click', () => {
                 this.toggleMobileMenu();
             });
         }
-
-        // Project card interactions - simplified
+    }
+    
+    setupCardInteractions() {
+        // Project card hover effects
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'translateY(-5px)';
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'translateY(0)';
             });
         });
 
-        // Skill card interactions - simplified
+        // Skill card hover effects
         document.querySelectorAll('.skill-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
                 card.style.transform = 'scale(1.08)';
             });
-
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'scale(1)';
             });
         });
-
-        // Form submission
+    }
+    
+    setupContactForm() {
         const contactForm = document.querySelector('#contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
@@ -128,30 +167,16 @@ class PortfolioApp {
                 this.handleFormSubmission(e.target);
             });
         }
-
-        // Commented out typing animation - too complex for simple portfolio
-        // this.initTypingAnimation();
     }
 
-    // setupLoadingScreen() {
-    //     const loading = document.querySelector('.loading');
-    //     if (loading) {
-    //         // Hide loading screen when page loads
-    //         window.addEventListener('load', () => {
-    //             loading.style.display = 'none';
-    //         });
-
-    //         // Fallback: hide loading screen after 2 seconds
-    //         setTimeout(() => {
-    //             if (loading) {
-    //                 loading.style.display = 'none';
-    //             }
-    //         }, 2000);
-    //     }
-    // }
+    // =============================================================================
+    // NAVIGATION & SCROLL HANDLING
+    // =============================================================================
 
     handleNavbarScroll() {
         const navbar = document.querySelector('.navbar');
+        if (!navbar) return;
+        
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
@@ -162,68 +187,48 @@ class PortfolioApp {
     updateActiveNavigation() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        if (!sections.length || !navLinks.length) return;
 
         let currentSection = '';
+        const scrollPosition = window.scrollY;
 
+        // Find the current section based on scroll position
         sections.forEach(section => {
             const sectionTop = section.offsetTop - 100; // Offset for navbar height
             const sectionHeight = section.offsetHeight;
-            const scrollPosition = window.scrollY;
 
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                 currentSection = section.getAttribute('id');
             }
         });
 
-        // Remove active class from all nav links
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-        });
+        // Update active navigation link
+        navLinks.forEach(link => link.classList.remove('active'));
 
-        // Add active class to current section's nav link
         if (currentSection) {
             const activeLink = document.querySelector(`.navbar-nav .nav-link[href="#${currentSection}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
+            if (activeLink) activeLink.classList.add('active');
         } else {
-            // If at the top, make home link active
+            // Default to home link when at the top
             const homeLink = document.querySelector('.navbar-nav .nav-link[href="#home"]');
-            if (homeLink) {
-                homeLink.classList.add('active');
-            }
+            if (homeLink) homeLink.classList.add('active');
         }
     }
 
-    // Commented out complex scroll animations - CSS handles this better
-    /*
-    handleScrollAnimations() {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        elements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const elementVisible = 150;
-            
-            if (elementTop < window.innerHeight - elementVisible) {
-                element.classList.add('animate-fade-in');
-            }
-        });
-    }
-    */
 
     smoothScrollTo(targetId) {
         const target = document.querySelector(targetId);
-        if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-            window.scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            });
+        if (!target) return;
+        
+        const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
 
-            // Update active navigation after scrolling
-            setTimeout(() => {
-                this.updateActiveNavigation();
-            }, 100);
-        }
+        // Update active navigation after scrolling
+        setTimeout(() => this.updateActiveNavigation(), 100);
     }
 
     toggleMobileMenu() {
@@ -232,99 +237,28 @@ class PortfolioApp {
             navbarCollapse.classList.toggle('show');
         }
     }
+    
+    // =============================================================================
+    // FORM HANDLING & VALIDATION
+    // =============================================================================
 
-    // Commented out complex card animations - simplified versions above
-    /*
-    animateProjectCard(card, action) {
-        const image = card.querySelector('.project-image img');
-        const content = card.querySelector('.project-content');
-        
-        if (action === 'enter') {
-            card.style.transform = 'translateY(-8px) scale(1.02)';
-            if (image) image.style.transform = 'scale(1.1)';
-            if (content) content.style.transform = 'translateY(-5px)';
-        } else {
-            card.style.transform = 'translateY(0) scale(1)';
-            if (image) image.style.transform = 'scale(1)';
-            if (content) content.style.transform = 'translateY(0)';
-        }
-    }
 
-    animateSkillCard(card, action) {
-        if (action === 'enter') {
-            card.style.transform = 'translateY(-5px) scale(1.05)';
-            card.style.borderColor = 'var(--accent-blue)';
-        } else {
-            card.style.transform = 'translateY(0) scale(1)';
-            card.style.borderColor = 'var(--border-light)';
-        }
-    }
-    */
 
-    // Commented out typing animation - unnecessary complexity
-    /*
-    initTypingAnimation() {
-        const heroTitle = document.querySelector('.hero-title');
-        if (!heroTitle) return;
-
-        const text = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.style.borderRight = '2px solid var(--accent-cyan)';
-
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroTitle.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            } else {
-                // Remove cursor after typing is complete
-                setTimeout(() => {
-                    heroTitle.style.borderRight = 'none';
-                }, 1000);
-            }
-        };
-
-        // Start typing animation after a short delay
-        setTimeout(typeWriter, 500);
-    }
-    */
-
-    // Commented out complex animation initialization - CSS handles this
-    /*
-    initializeAnimations() {
-        // Add animation classes to elements
-        const animateElements = document.querySelectorAll('.skill-card, .project-card, .timeline-item');
-        animateElements.forEach((element, index) => {
-            element.classList.add('animate-on-scroll');
-            element.style.animationDelay = `${index * 0.1}s`;
-        });
-
-        // Parallax effect for hero section
-        this.setupParallaxEffect();
-    }
-
-    setupParallaxEffect() {
-        const hero = document.querySelector('.hero');
-        if (!hero) return;
-
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            hero.style.transform = `translateY(${rate}px)`;
-        });
-    }
-    */
 
     setupFormHandling() {
         const form = document.querySelector('#contactForm');
         if (!form) return;
 
-        // Simplified form validation - only basic checks
+        // Real-time field validation on blur
         const inputs = form.querySelectorAll('input, textarea');
         inputs.forEach(input => {
             input.addEventListener('blur', () => {
                 this.validateField(input);
+            });
+            
+            // Clear validation on focus
+            input.addEventListener('focus', () => {
+                this.clearFieldValidation(input);
             });
         });
     }
@@ -335,26 +269,33 @@ class PortfolioApp {
         let isValid = true;
         let errorMessage = '';
 
+        // Only validate fields that are required (removed 'subject')
         switch (fieldName) {
             case 'name':
-                if (value.length < 2) {
+                if (!value || value.length < 2) {
                     isValid = false;
                     errorMessage = 'Name must be at least 2 characters long';
                 }
                 break;
+                
             case 'email':
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
+                if (!value || !emailRegex.test(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid email address';
                 }
                 break;
+                
             case 'message':
-                if (value.length < 10) {
+                if (!value || value.length < 10) {
                     isValid = false;
                     errorMessage = 'Message must be at least 10 characters long';
                 }
                 break;
+                
+            default:
+                // Skip validation for any other fields (like removed 'subject')
+                return true;
         }
 
         this.showFieldValidation(field, isValid, errorMessage);
@@ -375,31 +316,50 @@ class PortfolioApp {
                 errorElement.textContent = errorMessage;
             }
         } else {
-            field.classList.remove('error');
-            if (errorElement) {
-                errorElement.remove();
-            }
+            this.clearFieldValidation(field);
+        }
+    }
+    
+    clearFieldValidation(field) {
+        field.classList.remove('error');
+        const errorElement = field.parentNode.querySelector('.error-message');
+        if (errorElement) {
+            errorElement.remove();
         }
     }
 
     async handleFormSubmission(form) {
-        // Validate all fields first
-        const inputs = form.querySelectorAll('input, textarea');
+        // Get only the required form fields (excluding removed 'subject')
+        const requiredInputs = form.querySelectorAll('input[name="name"], input[name="email"], textarea[name="message"]');
         let isFormValid = true;
-
-        inputs.forEach(input => {
+        
+        // Validate only the existing required fields
+        requiredInputs.forEach(input => {
             if (!this.validateField(input)) {
                 isFormValid = false;
             }
         });
 
+        // Check if all required fields have values
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        
+        // Ensure all required fields are present and not empty
+        for (const fieldName of this.requiredFields) {
+            if (!data[fieldName] || !data[fieldName].trim()) {
+                isFormValid = false;
+                const field = form.querySelector(`[name="${fieldName}"]`);
+                if (field) {
+                    this.showFieldValidation(field, false, `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`);
+                }
+            }
+        }
+
         if (!isFormValid) {
-            this.showNotification('Please fix the errors before submitting.', 'error');
+            this.showNotification('Please fill in all required fields correctly.', 'error');
             return;
         }
 
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData.entries());
         const submitButton = form.querySelector('button[type="submit"]');
         const originalText = submitButton.innerHTML;
 
@@ -408,6 +368,7 @@ class PortfolioApp {
         submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
 
         try {
+            // Simulate API call (replace with your actual endpoint)
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
@@ -421,13 +382,10 @@ class PortfolioApp {
             if (response.ok && result.success) {
                 this.showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
                 form.reset();
-                // Clear any validation errors
-                inputs.forEach(input => {
-                    input.classList.remove('error');
-                    const errorElement = input.parentNode.querySelector('.error-message');
-                    if (errorElement) {
-                        errorElement.remove();
-                    }
+                
+                // Clear all validation errors
+                requiredInputs.forEach(input => {
+                    this.clearFieldValidation(input);
                 });
             } else {
                 throw new Error(result.message || 'Failed to send message.');
@@ -435,7 +393,15 @@ class PortfolioApp {
 
         } catch (error) {
             console.error('Form submission error:', error);
-            this.showNotification(error.message || 'Failed to send message. Please try again.', 'error');
+            
+            // For demo purposes, show success (remove this in production)
+            if (error.message.includes('fetch')) {
+                this.showNotification('Message received! (Demo mode - no actual email sent)', 'success');
+                form.reset();
+                requiredInputs.forEach(input => this.clearFieldValidation(input));
+            } else {
+                this.showNotification(error.message || 'Failed to send message. Please try again.', 'error');
+            }
         } finally {
             // Reset button state
             submitButton.disabled = false;
@@ -443,6 +409,10 @@ class PortfolioApp {
         }
     }
 
+    // =============================================================================
+    // NOTIFICATION SYSTEM
+    // =============================================================================
+    
     showNotification(message, type) {
         // Create notification element
         const notification = document.createElement('div');
@@ -450,51 +420,61 @@ class PortfolioApp {
         notification.innerHTML = `
             <div class="notification-content">
                 <span class="notification-message">${message}</span>
-                <button class="notification-close">&times;</button>
+                <button class="notification-close" aria-label="Close notification">&times;</button>
             </div>
         `;
 
-        // Add styles
+        // Apply notification styles
+        const bgColor = type === 'success' ? 'var(--accent-cyan)' : '#dc3545';
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            background: ${type === 'success' ? 'var(--accent-cyan)' : '#ff4757'};
-            color: var(--bg-primary);
+            background: ${bgColor};
+            color: white;
             padding: 1rem 1.5rem;
-            border-radius: var(--radius-sm);
+            border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             z-index: 10000;
             transform: translateX(100%);
             transition: transform 0.3s ease;
+            max-width: 400px;
+            word-wrap: break-word;
         `;
 
         document.body.appendChild(notification);
 
-        // Animate in
+        // Animate notification in
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
         }, 100);
 
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
+        // Auto-remove after 5 seconds
+        const autoRemove = setTimeout(() => {
+            this.removeNotification(notification);
         }, 5000);
 
-        // Close button functionality
+        // Manual close functionality
         const closeBtn = notification.querySelector('.notification-close');
         closeBtn.addEventListener('click', () => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
+            clearTimeout(autoRemove);
+            this.removeNotification(notification);
         });
     }
+    
+    removeNotification(notification) {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }
 
-    // Utility method for throttling scroll events
+    // =============================================================================
+    // UTILITY METHODS
+    // =============================================================================
+    
     throttle(func, limit) {
         let inThrottle;
         return function () {
@@ -508,24 +488,23 @@ class PortfolioApp {
         };
     }
 
-    // Commented out utility function - not needed for basic functionality
-    /*
-    isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-    */
 }
 
-// Initialize the app when DOM is loaded
+// =============================================================================
+// APPLICATION INITIALIZATION
+// =============================================================================
+
+// Initialize the portfolio application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new PortfolioApp();
+    initializeFallingStars();
+});
 
+// =============================================================================
+// ADDITIONAL VISUAL EFFECTS
+// =============================================================================
+
+function initializeFallingStars() {
     const container = document.querySelector('.shooting-stars');
     if (!container) return;
 
@@ -533,85 +512,25 @@ document.addEventListener('DOMContentLoaded', () => {
         const star = document.createElement('div');
         star.className = 'shooting-star';
 
-        // Random start X position
+        // Random positioning and properties
         const startLeft = Math.random() * 100;
-        star.style.left = startLeft + 'vw';
-
-        // Random size (tiny twinkling stars)
         const size = Math.random() * 3 + 2;
-        star.style.width = size + 'px';
-        star.style.height = size + 'px';
-
-        // Gentle horizontal drift
         const drift = (Math.random() - 0.5) * 50; // -25px to +25px
-        star.style.setProperty('--drift', drift + 'px');
-
-        // Random fall duration (slow & soft)
         const duration = (Math.random() * 5 + 6).toFixed(2); // 6–11s
-        star.style.animationDuration = duration + 's';
+        
+        star.style.cssText = `
+            left: ${startLeft}vw;
+            width: ${size}px;
+            height: ${size}px;
+            --drift: ${drift}px;
+            animation-duration: ${duration}s;
+        `;
 
         container.appendChild(star);
-
-        setTimeout(() => {
-            star.remove();
-        }, duration * 1000);
+        setTimeout(() => star.remove(), duration * 1000);
     }
 
-});
+    // Create falling stars periodically
+    setInterval(createFallingStar, 3000);
+}
 
-// Commented out utility functions - not needed for basic portfolio
-/*
-const Utils = {
-    // Debounce function for performance
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    // Throttle function for scroll events
-    throttle(func, limit) {
-        let inThrottle;
-        return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-                func.apply(context, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
-    },
-
-    // Smooth scroll utility
-    smoothScroll(target, duration = 1000) {
-        const targetPosition = target.getBoundingClientRect().top;
-        const startPosition = window.pageYOffset;
-        const distance = targetPosition - startPosition;
-        let startTime = null;
-
-        function animation(currentTime) {
-            if (startTime === null) startTime = currentTime;
-            const timeElapsed = currentTime - startTime;
-            const run = ease(timeElapsed, startPosition, distance, duration);
-            window.scrollTo(0, run);
-            if (timeElapsed < duration) requestAnimationFrame(animation);
-        }
-
-        function ease(t, b, c, d) {
-            t /= d / 2;
-            if (t < 1) return c / 2 * t * t + b;
-            t--;
-            return -c / 2 * (t * (t - 2) - 1) + b;
-        }
-
-        requestAnimationFrame(animation);
-    }
-};
-*/

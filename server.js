@@ -21,10 +21,10 @@ app.get("/", (req, res) => {
 // Email sending endpoint
 app.post("/api/send-email", async (req, res) => {
   try {
-    const { name, email, subject, message } = req.body;
+    const { name, email, message } = req.body;
 
     // Validation
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !message) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
@@ -53,7 +53,7 @@ app.post("/api/send-email", async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: `Portfolio Contact: ${subject}`,
+      // subject: `Portfolio Contact: ${subject}`,
       html: `
     <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#f4f4f4" style="font-family: Arial, sans-serif; padding:20px;">
       <tr>
@@ -68,7 +68,6 @@ app.post("/api/send-email", async (req, res) => {
                 <table width="100%" cellpadding="10" cellspacing="0" border="0" bgcolor="#e0f7fa" style="border-radius:8px;">
                   <tr><td><p style="margin:0;"><strong>Name:</strong> ${name}</p></td></tr>
                   <tr><td><p style="margin:0;"><strong>Email:</strong> ${email}</p></td></tr>
-                  <tr><td><p style="margin:0;"><strong>Subject:</strong> ${subject}</p></td></tr>
                   <tr><td><p style="margin:0;"><strong>Message:</strong></p></td></tr>
                   <tr>
                     <td>
