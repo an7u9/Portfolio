@@ -1,8 +1,3 @@
-/**
- * Portfolio Application - Enhanced Interactive Experience
- * Handles animations, form submissions, and user interactions
- */
-
 // =============================================================================
 // INITIALIZATION & BASIC SETUP
 // =============================================================================
